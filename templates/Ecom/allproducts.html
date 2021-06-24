@@ -44,14 +44,8 @@
           
           
            
-          
-          {% for pro in products %}
           {% for cat in categories %}
-          {% if pro.category.id == cat.id %}
 
-            
-  
-          
             
           <section class="section featured-product">
           <div class="row">
@@ -150,8 +144,7 @@
             </div>
             <!-- /.home-owl-carousel --> 
           </section>
-          {% endif %}
-          {% endfor %}
+          
           {% endfor %}
           <!-- /.section --> 
           <!-- ============================================== FEATURED PRODUCTS : END ============================================== --> 

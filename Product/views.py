@@ -80,22 +80,19 @@ def category_product(request, id, slug):
             cartcount = 0
 
     #Cart End
-    cproducts = Product.objects.get(pk=id)
     settings = Settings.objects.get(id=1)
     categories = Category.objects.all().order_by('-id')
     companies = Company.objects.all().order_by('-id')
-    products = Product.objects.filter(category=cproducts.category)
+    cproducts = Product.objects.filter(category_id=id)
     all_products = Product.objects.all()
     this = Category.objects.get(id=id)
-    pc = products.count()
-    if pc > 2:
-        products = Product.objects.filter(category=cproducts.category).order_by('id')[:3]
-    latest_products = Product.objects.filter(category=cproducts.category).order_by('-id')
+    pc = cproducts.count()
+    latest_products = Product.objects.filter(category_id=id).order_by('-id')
     diction = {
         'settings':settings,
         'categories':categories,
         'cproducts':cproducts,
-        'products':products,
+        'cproducts':cproducts,
         'latest_products':latest_products,
         'all_products':all_products,
         'total':total,

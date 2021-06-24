@@ -8,14 +8,11 @@
                 <ul class="nav">
                   
                   
-                  {% for pro in products %}
+                  
                   {% for cat in categories %}
-                  {% if pro.category.id == cat.id %}
                     
                     
                   <li class="dropdown menu-item"> <a href="{% url 'category_product' cat.id cat.slug %}" class="dropdown-toggle" ><i class="icon fa fa-shopping-bag" aria-hidden="true"></i>{{ cat.title }}</a>
-                  {% endif %}
-                  {% endfor %}
                   {% endfor %}
 
   
@@ -36,12 +33,8 @@
               <div class="sidebar-widget-body outer-top-xs">
                 <div class="tag-list"> 
                   
-                  {% for pro in products %}
                   {% for cat in categories %}
-                  {% if pro.category.id == cat.id %}
                   <a class="item" title="Phone" href="{% url 'category_product' cat.id cat.slug %}">{{ cat.title }}</a>
-                  {% endif %}
-                  {% endfor %}
                   {% endfor %}
 
                     
