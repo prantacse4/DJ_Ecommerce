@@ -1,0 +1,125 @@
+
+{% extends 'Ecom/Base.html' %}
+{% load static %}
+
+
+{% block title %}
+{{ settings.title  }}
+{% endblock title %}
+    
+{% block extracss %}
+  
+{% endblock extracss %}
+
+{% block main %}
+    
+
+
+<div class="breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-inner">
+			<ul class="list-inline list-unstyled">
+				<li><a href="#">Home</a></li>
+				<li class='active'>Shopping Cart</li>
+			</ul>
+		</div><!-- /.breadcrumb-inner -->
+	</div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+<div class="body-content outer-top-xs">
+	<div class="container">
+		<div class="row ">
+			<div class="shopping-cart">
+				<div class="shopping-cart-table ">
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="cart-romove item">Remove</th>
+					<th class="cart-description item">Image</th>
+					<th class="cart-product-name item">Product Name</th>
+					<th class="cart-qty item">Quantity</th>
+					<th class="cart-sub-total item">Subtotal</th>
+					<th class="cart-total last-item">Grandtotal</th>
+				</tr>
+			</thead><!-- /thead -->
+			
+			<tbody>
+
+                
+                {% for cp  in cart_products %}
+                    
+                    
+				<tr>
+					<td class="romove-item"><a href="{% url 'cart_delete' cp.id %}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
+					<td class="cart-image">
+						<a class="entry-thumbnail" href="#">
+						    <img src="{{ cp.product.imageurl }}" alt="">
+						</a>
+					</td>
+					<td class="cart-product-quantity">
+						<h4 class='cart-product-description'><a href="{% url 'single_product' cp.product.id %}">{{ cp.product.title }}</a></h4>
+					</td>
+					<td class="cart-product-quantity">
+						<div class="quant-input">
+				                
+				                <form action="{% url 'update_cart_qty' cp.id %}" method="post">
+									{% csrf_token %}
+									<input type="number" value="{{ cp.qty }}" name="qty"  max="{{ cp.product.amount }}">
+								</form>
+			              </div>
+		            </td>
+					<td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ cp.product.new_price }}</span></td>
+					<td class="cart-product-grand-total"><span class="cart-grand-total-price">{{ cp.amount }}</span></td>
+				</tr>
+
+                {% endfor %}
+
+
+
+			</tbody><!-- /tbody -->
+            
+            <tfoot>
+				<tr>
+					<td colspan="7">
+						<div class="shopping-cart-btn">
+							<span class="">
+								<a href="{% url 'home' %}" class="btn btn-upper btn-primary pull-right outer-right-xs">Continue Shopping</a>
+							</span>
+						</div><!-- /.shopping-cart-btn -->
+					</td>
+				</tr>
+			</tfoot>
+		</table><!-- /table -->
+	</div>
+</div><!-- /.shopping-cart-table -->				
+
+<div class="col-md-4 col-sm-12 cart-shopping-total">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					<div class="cart-sub-total">
+						Shipping Charge<span class="inner-left-md">100.00 TAKA</span>
+					</div>
+					<div class="cart-grand-total">
+						Total Amount<span class="inner-left-md">{{ total }} TAKA</span>
+					</div>
+				</th>
+			</tr>
+		</thead><!-- /thead -->
+		
+	</table><!-- /table -->
+	<div class="cart-checkout-btn ">
+		<a href="{% url 'checkout' %}" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</a>
+	</div>
+</div><!-- /.cart-shopping-total -->			</div><!-- /.shopping-cart -->
+		</div> <!-- /.row -->
+		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
+		
+<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
+</div><!-- /.body-content -->
+
+
+
+{% endblock main %}

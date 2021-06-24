@@ -1,0 +1,143 @@
+
+{% extends 'Ecom/Base.html' %}
+{% load static %}
+
+
+{% block title %}
+Signup
+{% endblock title %}
+    
+{% block extracss %}
+  
+{% endblock extracss %}
+
+{% block main %}
+    
+
+
+
+<div class="breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-inner">
+			<ul class="list-inline list-unstyled">
+				<li><a href="home.html">Home</a></li>
+				<li class='active'>Signup</li>
+			</ul>
+		</div><!-- /.breadcrumb-inner -->
+	</div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+<div class="body-content">
+	<div class="container">
+		<div class="sign-in-page">
+			<div class="row">
+				<!-- Sign-in -->			
+
+
+<!-- create a new account -->
+<div class="col-md-12 col-sm-12 create-new-account">
+	<h4 class="checkout-subtitle">Create a new account</h4>
+	<p class="text title-tag-line">Create your new account.</p>
+
+	
+
+	{% if myform.errors.username %}
+	<div class="alert alert-danger">
+		{{myform.errors.username}}
+	</div>
+	{% endif %}
+
+	{% if myform.errors.email %}
+	<div class="alert alert-danger">
+		<ul class="errorlist"><li>Email Already registered</li></ul>
+	</div>
+	{% endif %}
+
+	{% if myform.errors.password1 %}
+	<div class="alert alert-danger">
+		{{myform.errors.password1}}
+	</div>
+	{% endif %}
+
+	{% if myform.errors.password2 %}
+	<div class="alert alert-danger">
+		{{myform.errors.password2}}
+	</div>
+	{% endif %}
+
+
+
+	<form class="register-form outer-top-xs" method="POST">
+        {% csrf_token %}
+
+		<div class="form-group">
+	    	<label class="info-title" for="exampleInputEmail2">Username <span>*</span></label>
+	    	<input type="text" name="username" required id="username" placeholder="Choose Unique Username" class="form-control unicase-form-control text-input"  >
+	  	</div>
+        <div class="form-group">
+		    <label class="info-title" for="exampleInputEmail1">First Name <span>*</span></label>
+		    <input type="text" name="first_name" required id="first_name" placeholder="First Name"  class="form-control unicase-form-control text-input"  >
+		</div>
+        <div class="form-group">
+		    <label class="info-title" for="exampleInputEmail1">Last Name <span>*</span></label>
+		    <input type="text" name="last_name" placeholder="Last Name" required id="last_name" class="form-control unicase-form-control text-input"  >
+		</div>
+		<div class="form-group">
+	    	<label class="info-title" for="exampleInputEmail2">Email Address <span>*</span></label>
+	    	<input type="email" name="email" placeholder="xyz@gmail.com" required id="email" class="form-control unicase-form-control text-input"  >
+	  	</div>
+
+          
+        <div class="form-group">
+		    <label class="info-title" for="exampleInputEmail1">Password ( Containing an uppercase and number ) <span>*</span></label>
+		    <input type="password" name="password1" required  placeholder="Password1234" class="form-control unicase-form-control text-input"  >
+		</div>
+         <div class="form-group">
+		    <label class="info-title" for="exampleInputEmail1">Confirm Password <span>*</span></label>
+		    <input type="password" required  name="password2" placeholder="************" class="form-control unicase-form-control text-input"  >
+		</div>
+
+	  	<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Sign Up</button>
+	</form>
+	
+	
+</div>	
+<!-- create a new account -->			</div><!-- /.row -->
+		</div><!-- /.sigin-in-->
+		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
+
+<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
+</div><!-- /.body-content -->
+
+
+
+{% endblock main %}
+
+{% block extrajs %}
+	<script>
+		$( document ).ready(function() {
+			var cusername = localStorage.getItem("cusername");
+			if (cusername !== null) $('#username').val(cusername);
+
+			var first_name = localStorage.getItem("first_name");
+			if (first_name !== null) $('#first_name').val(first_name);
+			
+			var first_name = localStorage.getItem("first_name");
+			if (first_name !== null) $('#first_name').val(first_name);
+
+			var last_name = localStorage.getItem("last_name");
+			if (last_name !== null) $('#last_name').val(last_name);
+
+			var email = localStorage.getItem("email");
+			if (email !== null) $('#email').val(email);
+		});
+
+		window.onbeforeunload = function() {
+			localStorage.setItem("cusername", $('#username').val());
+			localStorage.setItem("first_name", $('#first_name').val());
+			localStorage.setItem("last_name", $('#last_name').val());
+			localStorage.setItem("email", $('#email').val());
+		}
+		
+	</script>
+{% endblock extrajs %}

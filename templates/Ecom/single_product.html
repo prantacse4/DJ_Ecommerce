@@ -1,0 +1,385 @@
+{% extends 'Ecom/Base.html' %}
+{% load static %}
+
+
+{% block title %}
+{{ single_product.title }}
+{% endblock title %}
+    
+{% block extracss %}
+<link href="{% static 'css/lightbox.css' %}" rel="stylesheet">
+  
+{% endblock extracss %}
+
+{% block main %}
+    
+
+<div class="body-content outer-top-xs" id="top-banner-and-menu">
+    <div class="container">
+        <div class="row single-product"> 
+        {% include 'Ecom/sidebar.html' %}
+
+        <div class='col-xs-12 col-sm-12 col-md-9 rht-col'>
+            <div class="detail-block">
+				<div class="row">
+                
+					     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 gallery-holder">
+    <div class="product-item-holder size-big single-product-gallery small-gallery">
+
+        <div id="owl-single-product">
+
+            
+            <div class="single-product-gallery-item" id="{{ single_product.imageurl }}">
+                <a data-lightbox="{{ single_product.imageurl }}" data-title="Gallery" href="{{ single_product.imageurl }}">
+                    <img class="img-responsive" alt="" src="{% static 'images/blank.gif' %}" data-echo="{{ single_product.imageurl }}" />
+                </a>
+            </div><!-- /.single-product-gallery-item -->
+                
+           
+           {% for pi in images %}
+           <div class="single-product-gallery-item" id="{{ pi.imageurl }}">
+            <a data-lightbox="{{ pi.imageurl }}" data-title="Gallery" href="{{ pi.imageurl }}">
+                <img class="img-responsive" alt="" src="{% static 'images/blank.gif' %}" data-echo="{{ pi.imageurl }}" />
+            </a>
+             </div><!-- /.single-product-gallery-item -->
+            
+           {% endfor %}
+               
+          
+      
+
+
+        </div><!-- /.single-product-slider -->
+
+
+        <div class="single-product-gallery-thumbs gallery-thumbs">
+
+            <div id="owl-single-product-thumbnails">
+
+                <div class="item">
+                    <a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="1" href="#{{single_product.imageurl}}">
+                        <img class="img-responsive" alt="" src="{% static 'images/blank.gif' %}" data-echo="{{ single_product.imageurl }}" />
+                    </a>
+                </div>
+
+                
+                {% for pi in images %}
+                <div class="item">
+                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="{{ forloop.counter }}" href="#{{ pi.imageurl }}">
+                        <img class="img-responsive" alt="" src="{% static 'images/blank.gif' %}" data-echo="{{ pi.imageurl }}" />
+                    </a>
+                </div>
+                {% endfor %}
+
+                
+                    
+            </div><!-- /#owl-single-product-thumbnails -->
+
+            
+
+        </div><!-- /.gallery-thumbs -->
+
+    </div><!-- /.single-product-gallery -->
+</div><!-- /.gallery-holder -->        			
+					<div class='col-sm-12 col-md-8 col-lg-8 product-info-block'>
+						<div class="product-info">
+							<h1 class="name">{{ single_product.title }} </h1>
+							
+							<div class="rating-reviews m-t-20">
+								<h5>Company: {{ single_product.company.title }}</h5>
+								<div class="row">
+                                <div class="col-lg-12">
+									<div class="pull-left">
+										{{ single_product.average_review }} Star
+									</div>
+									<div class="pull-left">
+										<div class="reviews">
+											<a href="#" class="lnk">({{ single_product.total_review }} Reviews)</a>
+										</div>
+									</div>
+                                    </div>
+								</div><!-- /.row -->		
+							</div><!-- /.rating-reviews -->
+
+							<div class="stock-container info-container m-t-10">
+								<div class="row">
+                                <div class="col-lg-12">
+									<div class="pull-left">
+										<div class="stock-box">
+											<span class="label">Availability :</span>
+										</div>	
+									</div>
+									
+                                    {% if single_product.status == 'True' %}
+                                    <div class="pull-left">
+										<div class="stock-box">
+											<span class="value">In Stock</span>
+										</div>	
+									</div>
+                                    {% endif %}
+
+                                    {% if single_product.status == 'False' %}
+                                    <div class="pull-left">
+										<div class="stock-box">
+											<span class="value">N/A</span>
+										</div>	
+									</div>
+                                    {% endif %}
+                                        
+                                    </div>
+								</div><!-- /.row -->	
+							</div><!-- /.stock-container -->
+
+							<div class="description-container m-t-20">
+								{{ single_product.detail|linebreaks }}
+							</div><!-- /.description-container -->
+
+							<div class="price-container info-container m-t-30">
+								<div class="row">
+									
+
+									<div class="col-sm-6 col-xs-6">
+										<div class="price-box">
+											<span class="price">{{ single_product.new_price }} TAKA</span>
+											<span class="price-strike">{{ single_product.old_price }}</span>
+										</div>
+									</div>
+
+									<div class="col-sm-6 col-xs-6">
+										<div class="favorite-button m-t-5">
+											<a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" href="{% url 'add_to_wishlist' single_product.id %}">
+											    <i class="fa fa-heart"></i>
+											</a>
+										</div>
+									</div>
+
+								</div><!-- /.row -->
+							</div><!-- /.price-container -->
+
+
+							{% if single_product.status == 'True' %}
+                                    
+                                    
+							<div class="quantity-container info-container">
+								<div class="row">
+									
+									<div class="qty">
+										<span class="label">Qty :</span>
+									</div>
+									
+
+									<form method="post" action="{% url 'add_to_cart' single_product.id %}">
+										{% csrf_token %}
+									<div class="qty-count">
+										<div class="cart-quantity">
+											<div class="quant-input">
+								                
+								                <input type="number" value="1" min="1" max="{{ single_product.amount }}" name="qty" required>
+							              </div>
+							            </div>
+									</div>
+
+									<div class="add-btn">
+										<button class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
+									</div>
+
+								</form>
+
+									
+								</div><!-- /.row -->
+							</div><!-- /.quantity-container -->
+
+							{% endif %}
+
+							
+
+							
+						</div><!-- /.product-info -->
+					</div><!-- /.col-sm-7 -->
+				</div><!-- /.row -->
+                </div>
+				
+				<div class="product-tabs inner-bottom-xs">
+					<div class="row">
+						<div class="col-sm-12 col-md-3 col-lg-3">
+							<ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
+								<li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
+								<li><a data-toggle="tab" href="#review">REVIEW</a></li>
+							</ul><!-- /.nav-tabs #product-tabs -->
+						</div>
+						<div class="col-sm-12 col-md-9 col-lg-9">
+
+							<div class="tab-content">
+								
+								<div id="description" class="tab-pane in active">
+									<div class="product-tab">
+										<p class="text">{{ single_product.detail|linebreaks }}</p>
+									</div>	
+								</div><!-- /.tab-pane -->
+
+								<div id="review" class="tab-pane">
+									<div class="product-tab">
+																				
+										<div class="product-reviews">
+											<h4 class="title">Customer Reviews</h4>
+
+											<div class="reviews">
+												
+												{% for com in comments %}
+												<div class="review">
+													<div class="review-title"><span class="summary">
+														{{ com.user.first_name }} {{ com.user.last_name }}
+														{% if com.user.first_name == "" %}
+															~ {{ com.user }}
+														{% endif %}
+															
+														</span><span class="date"><i class="fa fa-calendar"></i><span>{{ com.updated_at }}</span></span></div>
+													<div class="text">"{{ com.comment }}" <span class="date text-primary"> {{ com.rate }} Star</span></div>
+													
+												</div>
+												{% endfor %}
+
+											
+											</div><!-- /.reviews -->
+										</div><!-- /.product-reviews -->
+										
+
+
+
+
+
+										
+										<div class="product-add-review">
+
+											<form action="{% url 'Comment_Add' single_product.id %} " method="post">
+												{% csrf_token %}
+											<h4 class="title">Write your own review</h4>
+											<div class="review-table">
+												<div class="table-responsive">
+													<table class="table">	
+														<thead>
+															<tr>
+																<th class="cell-label">&nbsp;</th>
+																<th>1 star</th>
+																<th>2 stars</th>
+																<th>3 stars</th>
+																<th>4 stars</th>
+																<th>5 stars</th>
+															</tr>
+														</thead>	
+														<tbody>
+															<tr>
+																<td class="cell-label">Rating</td>
+																<td><input type="radio" name="rate" class="radio" checked value="1"></td>
+																<td><input type="radio" name="rate" class="radio" value="2"></td>
+																<td><input type="radio" name="rate" class="radio" value="3"></td>
+																<td><input type="radio" name="rate" class="radio" value="4"></td>
+																<td><input type="radio" name="rate" class="radio" value="5"></td>
+															</tr>
+														
+														</tbody>
+													</table><!-- /.table .table-bordered -->
+												</div><!-- /.table-responsive -->
+											</div><!-- /.review-table -->
+											
+											<div class="review-form">
+												<div class="form-container">
+													<div class="cnt-form">
+														
+														<div class="row">
+															<div class="col-sm-6">
+																<div class="form-group">
+																	<label for="exampleInputName">Your Name <span class="astk">*</span></label>
+																	<input type="text" class="form-control txt" id="exampleInputName" readonly value="{{ request.user.first_name }} {{ request.user.last_name }}  ~ {{ request.user }}">
+																</div><!-- /.form-group -->
+																<div class="form-group">
+																	<label for="exampleInputSummary">Subject <span class="astk">*</span></label>
+																	<input type="text" class="form-control txt" required id="exampleInputSummary" placeholder="" name="subject">
+																</div><!-- /.form-group -->
+															</div>
+
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="exampleInputReview">Review <span class="astk">*</span></label>
+																	<textarea class="form-control txt txt-review" required id="exampleInputReview" rows="4" name="comment" placeholder=""></textarea>
+																</div><!-- /.form-group -->
+															</div>
+														</div><!-- /.row -->
+														
+														<div class="action text-right">
+															<button class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
+														</div><!-- /.action -->
+
+													</div><!-- /.cnt-form -->
+												</div><!-- /.form-container -->
+											</div><!-- /.review-form -->
+
+										</form>
+
+										</div><!-- /.product-add-review -->										
+										
+
+
+
+
+
+
+
+
+
+
+
+							        </div><!-- /.product-tab -->
+								</div><!-- /.tab-pane -->
+
+							
+
+							</div><!-- /.tab-content -->
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.product-tabs -->
+
+
+
+
+				<!-- ============================================== UPSELL PRODUCTS ============================================== -->
+<section class="body-content outer-top-vs">
+<div class="row">
+
+	{% include 'Ecom/allproducts.html' %}
+          
+ </div>
+</section><!-- /.section -->
+<!-- ============================================== UPSELL PRODUCTS : END ============================================== -->
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</div><!-- /.col -->
+			<div class="clearfix"></div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock main %}
+    
+
+{% block extrajs %}
+
+
+{% endblock extrajs %}

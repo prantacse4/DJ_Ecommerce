@@ -1,0 +1,93 @@
+{% extends 'Ecom/Base.html' %}
+{% load static %}
+
+
+{% block title %}
+WishList
+{% endblock title %}
+
+{% block extracss %}
+
+{% endblock extracss %}
+
+{% block main %}
+
+
+
+<div class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <ul class="list-inline list-unstyled">
+                <li><a href="#">Home</a></li>
+                <li class='active'>My Wishlist</li>
+            </ul>
+        </div><!-- /.breadcrumb-inner -->
+    </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+<div class="body-content outer-top-xs">
+    <div class="container">
+        <div class="row ">
+            <div class="shopping-cart">
+                <div class="shopping-cart-table ">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="cart-romove item">Remove</th>
+                                    <th class="cart-romove item">Product</th>
+                                    <th class="cart-romove item">Product Title</th>
+                                    <th class="cart-description item">Price</th>
+                                    <th class="cart-sub-total item">Actions</th>
+                                </tr>
+                            </thead><!-- /thead -->
+
+                            <tbody>
+
+
+                                {% for wish in wishlist %}
+
+
+                                <tr>
+                                    <td class="romove-item"><a href="{% url 'add_to_wishlist' wish.product.id %}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
+                                    <td class="cart-image">
+                                        <a class="entry-thumbnail" href="{% url 'single_product' wish.product_id %}">
+                                            <img src="{{ wish.product.imageurl }}" alt="">
+                                        </a>
+                                    </td>
+
+                                    <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{wish.product.title }}</span></td>
+                                    <td class="cart-product-sub-total">
+                                        <span class="cart-sub-total-price">{{wish.product.new_price }}</span>
+                                    </td>
+
+                                   
+                                    <td class="cart-product-grand-total">
+                                        <a href="{% url 'add_to_cart' wish.product.id  %}" class="btn btn-info checkout-btn">Add To Cart</a>
+                                    </td>
+                                </tr>
+
+                                {% endfor %}
+
+
+
+                            </tbody><!-- /tbody -->
+
+                            <tfoot>
+                              
+                            </tfoot>
+                        </table><!-- /table -->
+                    </div>
+                </div><!-- /.shopping-cart-table -->
+
+            </div><!-- /.shopping-cart -->
+        </div> <!-- /.row -->
+        <!-- ============================================== BRANDS CAROUSEL ============================================== -->
+
+        <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
+    </div><!-- /.container -->
+</div><!-- /.body-content -->
+
+
+
+{% endblock main %}

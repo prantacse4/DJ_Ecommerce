@@ -1,0 +1,115 @@
+
+{% extends 'Ecom/Base.html' %}
+{% load static %}
+
+
+{% block title %}
+Contact
+{% endblock title %}
+    
+{% block extracss %}
+  
+{% endblock extracss %}
+
+{% block main %}
+    
+
+
+
+
+
+
+
+<!-- ============================================== HEADER : END ============================================== -->
+<div class="breadcrumb">
+  <div class="container">
+    <div class="breadcrumb-inner">
+      <ul class="list-inline list-unstyled">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li class='active'>Contact</li>
+      </ul>
+    </div><!-- /.breadcrumb-inner -->
+  </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+<div class="body-content">
+  <div class="container">
+    <div class="contact-page">
+      <div class="row">
+
+       
+
+        <form method="POST">
+          {% csrf_token %}
+        <div class="col-md-8 contact-form">
+          <div class="col-md-12 contact-title">
+            <h4>Contact Form</h4>
+          </div>
+
+          
+
+          <div class="col-md-4 ">
+            <div class="register-form" >
+              <div class="form-group">
+                <label class="info-title" for="exampleInputName">Your Name <span>*</span></label>
+                <input type="text" name="name" required class="form-control unicase-form-control text-input" id="exampleInputName"
+                  placeholder="Name">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+              <div class="form-group">
+                <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
+                <input type="email" name="email" required class="form-control unicase-form-control text-input" id="exampleInputEmail1"
+                  placeholder="">
+              </div>
+          </div>
+          <div class="col-md-4">
+            <div class="register-form" role="form">
+              <div class="form-group">
+                <label class="info-title"  for="exampleInputTitle">Subject <span>*</span></label>
+                <input type="text" name="subject" required class="form-control unicase-form-control text-input" id="exampleInputTitle"
+                  placeholder="Subject">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="register-form" role="form">
+              <div class="form-group">
+                <label class="info-title" for="exampleInputComments">Your Message <span>*</span></label>
+                <textarea required name="message" class="form-control unicase-form-control" id="exampleInputComments"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 outer-bottom-small m-t-20">
+            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Send Message</button>
+          </div>
+
+        </div>
+      </form>
+
+        <div class="col-md-4 contact-info">
+          <div class="contact-title">
+            <h4>Information</h4>
+          </div>
+          <div class="clearfix address">
+            <span class="contact-i"><i class="fa fa-map-marker"></i></span>
+            <span class="contact-span">{{ settings.address }}</span>
+          </div>
+          <div class="clearfix phone-no">
+            <span class="contact-i"><i class="fa fa-mobile"></i></span>
+            <span class="contact-span">+(880) {{ settings.phone }}</span>
+          </div>
+          <div class="clearfix email">
+            <span class="contact-i"><i class="fa fa-envelope"></i></span>
+            <span class="contact-span"><a href="#">{{ settings.email }}</a></span>
+          </div>
+        </div>
+      </div><!-- /.contact-page -->
+    </div><!-- /.row -->
+  </div>
+</div>
+
+
+{% endblock main %}

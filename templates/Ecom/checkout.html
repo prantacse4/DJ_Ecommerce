@@ -1,0 +1,76 @@
+
+{% extends 'Ecom/Base.html' %}
+{% load static %}
+
+
+{% block title %}
+Checkout
+{% endblock title %}
+    
+{% block extracss %}
+  <link rel="stylesheet" href="{% static 'css/mycss.css' %}">
+{% endblock extracss %}
+
+{% block main %}
+    
+
+
+
+
+
+
+
+<!-- ============================================== HEADER : END ============================================== -->
+<div class="breadcrumb">
+  <div class="container">
+    <div class="breadcrumb-inner">
+      <ul class="list-inline list-unstyled">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li class='active'>Checkout</li>
+      </ul>
+    </div><!-- /.breadcrumb-inner -->
+  </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+
+<div class="container">
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <label>First Name</label><br>
+    <input type="text" class="form-control" required name="first_name" placeholder="First Name" value="{{ user.first_name }}">
+    <br><br>
+
+    <label>Last Name</label><br>
+    <input type="text" class="form-control" required name="last_name" placeholder="Last Name" value="{{ user.last_name }}">
+    <br><br>
+
+    <label>Address</label><br>
+    <input type="text" class="form-control" required name="address" placeholder="Address" value="{{ profile.address }}">
+    <br><br>
+
+
+    <label>City</label><br>
+    <input type="text" class="form-control" required name="city" placeholder="City" value="{{ profile.city }}">
+    <br><br>
+
+    <label>Phone</label><br>
+    <input type="text" class="form-control" required name="phone" placeholder="Phone" value="{{ profile.phone }}">
+    <br><br>
+
+    <label>Country</label><br>
+    <input type="text" class="form-control" required name="country" placeholder="Country" value="{{ profile.country }}">
+    <br><br>
+
+    <h5>Grand Total: {{ total }}</h5>
+
+
+
+    <br>
+    <button class="btn btn-info">Checkout</button>
+    <br>
+  </form>
+</div>
+
+
+{% endblock main %}

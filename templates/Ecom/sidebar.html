@@ -1,0 +1,60 @@
+        <!-- ============================================== SIDEBAR ============================================== -->
+        <div class="col-xs-12 col-sm-12 col-md-3 sidebar"> 
+          {% load static %}
+            <!-- ================================== TOP NAVIGATION ================================== -->
+            <div class="side-menu animate-dropdown outer-bottom-xs">
+              <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
+              <nav class="yamm megamenu-horizontal">
+                <ul class="nav">
+                  
+                  
+                  {% for pro in products %}
+                  {% for cat in categories %}
+                  {% if pro.category.id == cat.id %}
+                    
+                    
+                  <li class="dropdown menu-item"> <a href="{% url 'category_product' cat.id cat.slug %}" class="dropdown-toggle" ><i class="icon fa fa-shopping-bag" aria-hidden="true"></i>{{ cat.title }}</a>
+                  {% endif %}
+                  {% endfor %}
+                  {% endfor %}
+
+  
+     
+                  
+                </ul>
+                <!-- /.nav --> 
+              </nav>
+              <!-- /.megamenu-horizontal --> 
+            </div>
+            <!-- /.side-menu --> 
+            <!-- ================================== TOP NAVIGATION : END ================================== --> 
+            
+         
+            <!-- ============================================== PRODUCT TAGS ============================================== -->
+            <div class="sidebar-widget product-tag">
+              <h3 class="section-title">Product tags</h3>
+              <div class="sidebar-widget-body outer-top-xs">
+                <div class="tag-list"> 
+                  
+                  {% for pro in products %}
+                  {% for cat in categories %}
+                  {% if pro.category.id == cat.id %}
+                  <a class="item" title="Phone" href="{% url 'category_product' cat.id cat.slug %}">{{ cat.title }}</a>
+                  {% endif %}
+                  {% endfor %}
+                  {% endfor %}
+
+                    
+                  </div>
+                <!-- /.tag-list --> 
+              </div>
+              <!-- /.sidebar-widget-body --> 
+            </div>
+            <!-- /.sidebar-widget --> 
+          
+            
+            
+          </div>
+          <!-- /.sidemenu-holder --> 
+          <!-- ============================================== SIDEBAR : END ============================================== --> 
+          

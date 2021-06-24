@@ -1,0 +1,100 @@
+
+{% extends 'Ecom/Base.html' %}
+{% load static %}
+
+
+{% block title %}
+Profile
+{% endblock title %}
+    
+{% block extracss %}
+  
+{% endblock extracss %}
+
+{% block main %}
+    
+
+
+
+
+
+
+
+<!-- ============================================== HEADER : END ============================================== -->
+<div class="breadcrumb">
+  <div class="container">
+    <div class="breadcrumb-inner">
+      <ul class="list-inline list-unstyled">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li class='active'>Profile</li>
+      </ul>
+    </div><!-- /.breadcrumb-inner -->
+  </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12">
+          <a href="{% url 'user_profile' %}" class="btn btn-info">UserProfile</a><br><br>
+          <a href="{% url 'Order_showing' %}" class="btn btn-info">My Orders</a><br><br>
+          <a href="{% url 'Order_Product_showing' %}" class="btn btn-info">My Order Product</a><br><br>
+          <a href="{% url 'user_comment' %}" class="btn btn-info">My Comments</a><br><br>
+          <a href="{% url 'mywishlist' %}" class="btn btn-info">My Wishlist</a><br><br>
+          <a href="{% url 'user_update' %}" class="btn btn-info">Update Profile</a><br><br>
+          <a href="{% url 'logout_user' %}" class="btn btn-info">Logout</a><br><br>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12">
+            <div class="sidebar-widget outer-top-vs ">
+                <div id="advertisement" class="advertisement">
+                  <div class="item">
+                    <div class="avatar">
+                      
+                      {% if profile.image %}
+                      <img src="{{ profile.imageurl }}" alt="Image">
+                        
+                      {% else %}
+                      <img src="{{ settings.imageurl }}" alt="Image">
+
+                      {% endif %}
+                        
+                    </div>
+                    <div class="clients_author">{{ profile.user.first_name }} {{ profile.user.last_name }}</div>
+                    <div class="testimonials"><hr>
+                      <p>Username : {{ profile.user.username }}</p>
+                      <p>Email : {{ profile.user.email }}</p>
+                      
+                      {% if profile.phone %}
+                      <p>Phone : {{ profile.phone }}</p>
+                        
+                      {% endif %}
+
+                      {% if profile.address %}
+                      <p>Address : {{ profile.address }}</p>
+                      {% endif %}
+
+                      {% if profile.city %}
+                      <p>City : {{ profile.city }}</p>
+                      {% endif %}
+
+                      {% if profile.country %}
+                      <p>Country : {{ profile.country }}</p>
+                      {% endif %}
+                        
+                    </div>
+
+                    <!-- /.container-fluid --> 
+                  </div>
+                  <!-- /.item -->
+                  
+                
+                  
+                </div>
+                <!-- /.owl-carousel --> 
+              </div>
+              
+        </div>
+    </div>
+</div>
+
+
+{% endblock main %}

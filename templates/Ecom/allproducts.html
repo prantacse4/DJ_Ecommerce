@@ -1,0 +1,265 @@
+          <!-- ============================================== SCROLL TABS : END ============================================== --> 
+          <!-- ============================================== WIDE PRODUCTS ============================================== -->
+         
+         {% load static %}
+         <style>
+           .p-2{
+             padding: 1.2rem;
+             margin-top: .5rem;
+             margin-bottom: .5rem;
+           }
+         </style>
+          <div class="wide-banners outer-bottom-xs">
+            <div class="row">
+              <div class="col-md-4 col-sm-4">
+                <div class="wide-banner cnt-strip">
+                  <div class="image"> <img class="img-responsive" src="{% static 'images/banners/home-banner1.jpg' %}" alt=""> </div>
+                </div>
+                <!-- /.wide-banner --> 
+              </div>
+              
+              <div class="col-md-4 col-sm-4">
+                <div class="wide-banner cnt-strip">
+                  <div class="image"> <img class="img-responsive" src="{% static 'images/banners/home-banner3.jpg' %}" alt=""> </div>
+                </div>
+                <!-- /.wide-banner --> 
+              </div>
+              
+              <!-- /.col -->
+              <div class="col-md-4 col-sm-4">
+                <div class="wide-banner cnt-strip">
+                  <div class="image"> <img class="img-responsive" src="{% static 'images/banners/home-banner2.jpg' %}" alt=""> </div>
+                </div>
+                <!-- /.wide-banner --> 
+              </div>
+              <!-- /.col --> 
+            </div>
+            <!-- /.row --> 
+          </div>
+          <!-- /.wide-banners --> 
+          
+          <!-- ============================================== WIDE PRODUCTS : END ============================================== --> 
+          <!-- ============================================== FEATURED PRODUCTS ============================================== -->
+          
+          
+          
+           
+          
+          {% for pro in products %}
+          {% for cat in categories %}
+          {% if pro.category.id == cat.id %}
+
+            
+  
+          
+            
+          <section class="section featured-product">
+          <div class="row">
+          
+          
+          <div class="col-lg-3">
+            
+            
+              
+            
+              
+            <h3 class="section-title">{{ cat.title }}</h3>
+            <ul class="sub-cat">
+          {% for com in companies %}
+              
+              {% if com.catgory.id == cat.id %}
+              <li><a href="#">{{ com.title }}</a></li>
+              {% endif %}
+                
+          {% endfor %}
+
+            </ul>
+            </div>
+            <div class="col-lg-9">
+            <div class="owl-carousel homepage-owl-carousel custom-carousel owl-theme outer-top-xs">
+              
+              
+
+              
+              {% for ap in products %}
+                
+              
+              {% if ap.category.id == cat.id %}
+                
+                
+                
+              <div class="item item-carousel">
+                <div class="products">
+                  <div class="product">
+                    <div class="product-image">
+                      <div class="image"> 
+                      <a href="{% url 'single_product' ap.id %}">
+                         <img src="{{ ap.imageurl }}" alt=""> 
+                      </a> 
+                   </div>
+                      <!-- /.image -->
+                      
+                      <div class="tag new"><span>new</span></div>
+                    </div>
+                    <!-- /.product-image -->
+                    
+                    <div class="product-info text-left">
+                      <h3 class="name"><a href="{% url 'single_product' ap.id %}">{{ ap.title }}</a></h3>
+                      {{ ap.average_review}} Star  ~  {{ ap.total_review }} reviews
+                      <div class="description"></div>
+                      <div class="product-price"> <span class="price">{{ ap.new_price }}TAKA </span> <span class="price-before-discount">{{ ap.old_price }}</span> </div>
+                      <!-- /.product-price --> 
+                      
+                    </div>
+                    <!-- /.product-info -->
+                    <div class="cart clearfix animate-effect">
+                      <div class="action">
+                        <ul class="list-unstyled">
+                          <li class="add-cart-button btn-group">
+                            <form action="{% url 'add_to_cart' ap.id %}" class="d-inline" method="POST">
+                              {% csrf_token %}
+                              <input type="number" class="d-none" value="1" name="qty">
+                              <button class="btn btn-primary icon"><i class="fa fa-shopping-cart"></i></button>
+                            </form>
+                          </li>
+                          <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="{% url 'add_to_wishlist' ap.id %}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                          
+                        </ul>
+                      </div>
+                      <!-- /.action --> 
+                    </div>
+                    <!-- /.cart --> 
+                  </div>
+                  <!-- /.product --> 
+                  
+                </div>
+                <!-- /.products --> 
+              </div>
+              <!-- /.item -->
+              
+              {% endif %}
+              {% endfor %}
+              
+              
+              
+              
+            
+              
+            </div>
+            </div>
+            </div>
+            <!-- /.home-owl-carousel --> 
+          </section>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+          <!-- /.section --> 
+          <!-- ============================================== FEATURED PRODUCTS : END ============================================== --> 
+          <!-- ============================================== WIDE PRODUCTS ============================================== -->
+          <div class="wide-banners outer-bottom-xs">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="wide-banner1 cnt-strip">
+                  <div class="image"> <img class="img-responsive" src="{% static 'images/banners/home-banner.jpg' %}" alt=""> </div>
+                  <div class="strip strip-text">
+                    <div class="strip-inner">
+                      <h2 class="text-right">Amazing Sunglasses<br>
+                        <span class="shopping-needs">Get 40% off on selected items</span></h2>
+                    </div>
+                  </div>
+                  <div class="new-label">
+                    <div class="text">NEW</div>
+                  </div>
+                  <!-- /.new-label --> 
+                </div>
+                <!-- /.wide-banner --> 
+              </div>
+              <!-- /.col --> 
+              <div class="col-md-4">
+                <div class="wide-banner cnt-strip">
+                  <div class="image"> <img class="img-responsive" src="{% static 'images/banners/home-banner4.jpg' %}" alt=""> </div>
+                  
+                  
+                  <!-- /.new-label --> 
+                </div>
+                <!-- /.wide-banner --> 
+              </div>
+              
+            </div>
+            <!-- /.row --> 
+          </div>
+          <!-- /.wide-banners --> 
+          <!-- ============================================== WIDE PRODUCTS : END ============================================== --> 
+          
+          
+          
+          <!-- /.sidebar-widget --> 
+          <!-- ============================================== BEST SELLER : END ============================================== --> 
+          
+       
+          <!-- ============================================== FEATURED PRODUCTS ============================================== -->
+          <section class="section new-arriavls">
+            <h3 class="section-title">All Products</h3>
+            <div class="row">
+            {% for ap in products %}
+            <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="p-2">
+                 
+              <div class="item item-carousel">
+                <div class="products">
+                  <div class="product">
+                    <div class="product-image">
+                      <div class="image"> 
+                      <a href="{% url 'single_product' ap.id %}">
+                         <img src="{{ ap.imageurl }}" alt=""> 
+                      </a> 
+                   </div>
+                      <!-- /.image -->
+                      
+                      <div class="tag new"><span>new</span></div>
+                    </div>
+                    <!-- /.product-image -->
+                    
+                    <div class="product-info text-left">
+                      <h3 class="name"><a href="{% url 'single_product' ap.id %}">{{ ap.title }}</a></h3>
+                      {{ ap.average_review}} Star  ~  {{ ap.total_review }} reviews
+                      <div class="description"></div>
+                      <div class="product-price"> <span class="price">{{ ap.new_price }}TAKA </span> <span class="price-before-discount">{{ ap.old_price }}</span> </div>
+                      <!-- /.product-price --> 
+                      
+                    </div>
+                    <!-- /.product-info -->
+                    <div class="cart clearfix animate-effect">
+                      <div class="action">
+                        <ul class="list-unstyled">
+                          <li class="add-cart-button btn-group">
+                            <form action="{% url 'add_to_cart' ap.id %}" class="d-inline" method="POST">
+                              {% csrf_token %}
+                              <input type="number" class="d-none" value="1" name="qty">
+                              <button class="btn btn-primary icon"><i class="fa fa-shopping-cart"></i></button>
+                            </form>
+                          </li>
+                          <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="{% url 'add_to_wishlist' ap.id %}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                          
+                        </ul>
+                      </div>
+                      <!-- /.action --> 
+                    </div>
+                    <!-- /.cart --> 
+                  </div>
+                  <!-- /.product --> 
+                  
+                </div>
+                <!-- /.products --> 
+              </div>
+              <!-- /.item -->
+             
+            </div>
+          </div>
+          
+            {% endfor %}
+          </div>
+
+            <!-- /.home-owl-carousel --> 
+          </section>
+          <!-- /.section --> 

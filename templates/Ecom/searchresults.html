@@ -1,0 +1,181 @@
+{% extends 'Ecom/Base.html' %}
+{% load static %}
+
+
+{% block title %}
+Search
+{% endblock title %}
+    
+
+{% block main %}
+
+
+<div class="body-content outer-top-vs" id="top-banner-and-menu">
+    <div class="container">
+      <div class="row"> 
+        {% include 'Ecom/sidebar.html' %}
+        <!-- ============================================== CONTENT ============================================== -->
+        <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder"> 
+          <!-- ========================================== SECTION – HERO ========================================= -->
+          
+          <div id="hero">
+            <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
+
+              
+              {% if results %}
+                  
+                  
+              {% for p in results %}
+                
+              <div class="item" style="background-image: url({{ p.image.url }});">
+                <div class="container-fluid">
+                  <div class="caption bg-color vertical-center text-left">
+                    <div class="slider-header fadeInDown-1 text-white">Top Brands</div>
+                    <div class="big-text fadeInDown-1"> New Collections </div>
+                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> </div>
+                    <div class="button-holder fadeInDown-3"> <a href="#" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                  </div>
+                  <!-- /.caption --> 
+                </div>
+                <!-- /.container-fluid --> 
+              </div>
+              <!-- /.item -->
+
+              {% endfor %}
+              {% endif %}
+
+                
+            </div>
+            <!-- /.owl-carousel --> 
+          </div>
+          
+          <!-- ========================================= SECTION – HERO : END ========================================= --> 
+          
+  
+          <!-- ============================================== SCROLL TABS ============================================== -->
+          <div id="product-tabs-slider" class="scroll-tabs outer-top-vs">
+            <div class="more-info-tab clearfix ">
+              <h3 class="new-product-title pull-left">Your Search Results</h3>
+              <ul class="nav nav-tabs nav-tab-line pull-right" id="new-products-1">
+                <li class="active"><a data-transition-type="backSlide" href="#all" data-toggle="tab">All</a></li>
+              </ul>
+              <!-- /.nav-tabs --> 
+            </div>
+
+
+            {% if results %}
+            <div class="tab-content outer-top-xs">
+              <div class="tab-pane in active" id="all">
+                <div class="product-slider">
+
+
+                  <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
+
+
+                    {% for lp in results %}
+                      
+                      
+                    <div class="item item-carousel">
+                      <div class="products">
+                        <div class="product">
+                          <div class="product-image">
+                            <div class="image"> 
+                            <a href="{% url 'single_product' lp.id %}">
+                               <img src="{{ lp.imageurl }}" alt=""> 
+                            </a> 
+                         </div>
+                            <!-- /.image -->
+                            
+                            <div class="tag new"><span>new</span></div>
+                          </div>
+                          <!-- /.product-image -->
+                          
+                          <div class="product-info text-left">
+                            <h3 class="name"><a href="{% url 'single_product' lp.id %}">{{ lp.title }}</a></h3>
+                            {{ lp.average_review}} Star  ~  {{ lp.total_review }} reviews
+                            <div class="description"></div>
+                            <div class="product-price"> <span class="price">{{ lp.new_price }}TAKA </span> <span class="price-before-discount">{{ lp.old_price }}</span> </div>
+                            <!-- /.product-price --> 
+                            
+                          </div>
+                          <!-- /.product-info -->
+                          <div class="cart clearfix animate-effect">
+                            <div class="action">
+                              <ul class="list-unstyled">
+                                <li class="add-cart-button btn-group">
+                                  <form action="{% url 'add_to_cart' lp.id %}" class="d-inline" method="POST">
+                                    {% csrf_token %}
+                                    <input type="number" class="d-none" value="1" name="qty">
+                                    <button class="btn btn-primary icon"><i class="fa fa-shopping-cart"></i></button>
+                                  </form>
+                                </li>
+                                <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="{% url 'add_to_wishlist' lp.id %}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                
+                              </ul>
+                            </div>
+                            <!-- /.action --> 
+                          </div>
+                          <!-- /.cart --> 
+                        </div>
+                        <!-- /.product --> 
+                        
+                      </div>
+                      <!-- /.products --> 
+                    </div>
+                    <!-- /.item -->
+
+                    {% endfor %}
+
+
+
+
+
+                    
+                   
+                    
+               
+                
+                  </div>
+                  <!-- /.home-owl-carousel --> 
+                </div>
+                <!-- /.product-slider --> 
+              </div>
+              <!-- /.tab-pane -->
+              
+             
+             
+              
+            
+              
+            </div>
+            {% else %}
+            <div class="tab-content outer-top-xs">
+                <h4>No Results Found</h4><br>
+            </div>
+            {% endif %}
+
+            <!-- /.tab-content --> 
+          </div>
+          <!-- /.scroll-tabs --> 
+          <!-- ============================================== SCROLL TABS : END ============================================== --> 
+          <!-- ============================================== WIDE PRODUCTS ============================================== -->
+         
+          
+          {% include 'Ecom/allproducts.html' %}
+        </div>
+        <!-- /.homebanner-holder --> 
+        <!-- ============================================== CONTENT : END ============================================== --> 
+      </div>
+      <!-- /.row --> 
+      <!-- ============================================== BRANDS CAROUSEL ============================================== -->
+   
+      <!-- /.logo-slider --> 
+      <!-- ============================================== BRANDS CAROUSEL : END ============================================== --> 
+    </div>
+    <!-- /.container --> 
+  </div>
+  <!-- /#top-banner-and-menu --> 
+  
+    
+{% endblock main %}
+    

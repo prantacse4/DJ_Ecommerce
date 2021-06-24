@@ -1,0 +1,92 @@
+
+{% extends 'Ecom/Base.html' %}
+{% load static %}
+
+
+{% block title %}
+My Comments
+{% endblock title %}
+    
+{% block extracss %}
+  
+{% endblock extracss %}
+
+{% block main %}
+    
+
+
+
+
+
+
+
+<!-- ============================================== HEADER : END ============================================== -->
+<div class="breadcrumb">
+  <div class="container">
+    <div class="breadcrumb-inner">
+      <ul class="list-inline list-unstyled">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li class='active'>Profile</li>
+      </ul>
+    </div><!-- /.breadcrumb-inner -->
+  </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 col-md-2 col-sm-12">
+            <a href="#" class="btn btn-info">UserProfile</a><br><br>
+            <a href="{% url 'Order_showing' %}" class="btn btn-info">My Orders</a><br><br>
+            <a href="{% url 'Order_Product_showing' %}" class="btn btn-info">My Order Product</a><br><br>
+            <a href="{% url 'user_comment' %}" class="btn btn-info">My Comments</a><br><br>
+            <a href="#" class="btn btn-info">My Wishlist</a><br><br>
+            <a href="#" class="btn btn-info">My Products</a><br><br>
+            <a href="{% url 'user_update' %}" class="btn btn-info">Update Profile</a><br><br>
+            <a href="{% url 'logout_user' %}" class="btn btn-info">Logout</a><br><br>
+        </div>
+
+        <div class="col-md-10 col-md-10 col-sm-12 ">
+            <div class="shopping-cart">
+                <div class="shopping-cart-table ">
+                    <div class="table-responsive">
+                        <table class="table">
+                                <tr>
+                                    <th>Item Image</th>
+                                    <th>Product Name</th>
+                                    <th>Comment Title</th>
+                                    <th>Comment</th>
+                                    <th>Comment Status</th>
+                                    <th>Comment Date</th>
+                                    <th>Action</th>
+                                </tr>
+                                
+                                {% for c in comment %}
+                                    <tr>
+                                        <td class="cart-image">
+                                            <a class="entry-thumbnail" href="{% url 'single_product' c.product.id %}">
+                                                <img src="{{ c.product.imageurl }}" alt="">
+                                            </a>
+                                        </td>
+                                        <td>{{ c.product.title }}</td>
+                                        <td>{{ c.subject }}</td>
+                                        <td>{{ c.comment }}</td>
+                                        <td>{{ c.status }}</td>
+                                        <td>{{ c.created_at }}</td>
+                                        <td> <a href="{% url 'comment_delete' c.id %}" class="btn btn-danger" onclick="return confirm('Are you sure to delete comment?')">Delete</a></td>
+                                    </tr>
+                                {% endfor %}
+                                    
+                               
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div> <!-- /.row -->
+        
+    </div>
+</div>
+
+
+{% endblock main %}

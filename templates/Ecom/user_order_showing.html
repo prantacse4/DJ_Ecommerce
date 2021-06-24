@@ -1,0 +1,114 @@
+{% extends 'Ecom/Base.html' %}
+{% load static %}
+
+
+{% block title %}
+All Orders
+{% endblock title %}
+
+{% block extracss %}
+
+{% endblock extracss %}
+
+{% block main %}
+
+
+
+<div class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <ul class="list-inline list-unstyled">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class='active'>User Orders</li>
+            </ul>
+        </div><!-- /.breadcrumb-inner -->
+    </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+<div class="body-content outer-top-xs">
+    <div class="container">
+        <div class="row ">
+
+            <div class="col-lg-2 col-md-2 col-sm-12">
+                <a href="{% url 'user_profile' %}" class="btn btn-info">UserProfile</a><br><br>
+                <a href="{% url 'Order_showing' %}" class="btn btn-info">My Orders</a><br><br>
+                <a href="{% url 'Order_Product_showing' %}" class="btn btn-info">My Order Product</a><br><br>
+                <a href="{% url 'user_comment' %}" class="btn btn-info">My Comments</a><br><br>
+                <a href="{% url 'mywishlist' %}" class="btn btn-info">My Wishlist</a><br><br>
+                <a href="{% url 'user_update' %}" class="btn btn-info">Update Profile</a><br><br>
+                <a href="{% url 'logout_user' %}" class="btn btn-info">Logout</a><br><br>
+              </div>
+
+              <div class="col-lg-10 col-md-10 col-sm-12">
+
+            <div class="shopping-cart">
+                <div class="shopping-cart-table ">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="cart-romove item">Username</th>
+                                    <th class="cart-description item">Order Price</th>
+                                    <th class="cart-product-name item">Status</th>
+                                    <th class="cart-qty item">Admin Notes</th>
+                                    <th class="cart-sub-total item">Actions</th>
+                                </tr>
+                            </thead><!-- /thead -->
+
+                            <tbody>
+
+
+                                {% for ord in orders %}
+
+
+                                <tr>
+                                    <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ord.user.username }}</span></td>
+                                    
+
+                                    <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ord.total }} Taka</span></td>
+                                    <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{ord.status }}</span></td>
+                                    
+                                    <td class="cart-product-sub-total"><span class="cart-sub-total-price">
+                                        
+                                        {% if ord.adminnote  %}
+                                        {{ord.adminnote }}
+                                        {% else %}
+                                        N/A
+                                        {% endif %}
+                                            
+                                    </span></td>
+                                    
+                                    
+                                   
+                                    
+                                    <td class="cart-product-grand-total">
+                                        <a href="{% url 'user_order_details' ord.id  %}" class="btn btn-info checkout-btn">Details</a>
+                                    </td>
+                                </tr>
+
+                                {% endfor %}
+
+
+
+                            </tbody><!-- /tbody -->
+
+                            <tfoot>
+                              
+                            </tfoot>
+                        </table><!-- /table -->
+                    </div>
+                </div><!-- /.shopping-cart-table -->
+
+            </div><!-- /.shopping-cart -->
+            </div>
+
+        </div> <!-- /.row -->
+        <!-- ============================================== BRANDS CAROUSEL ============================================== -->
+
+        <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
+    </div><!-- /.container -->
+</div><!-- /.body-content -->
+
+
+
+{% endblock main %}
