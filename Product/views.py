@@ -156,7 +156,7 @@ def searchproducts(request):
     }
     return render(request, 'Ecom/searchresults.html', context = diction)
 
-
+@login_required(login_url='login_user')
 def Comment_Add(request, id):
     if request.method == "POST":
         form = CommentForm(request.POST)

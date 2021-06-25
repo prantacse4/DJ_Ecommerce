@@ -181,6 +181,7 @@ def signup_user(request):
         return render(request, 'Ecom/signup_user.html', context = diction)
 
 
+@login_required(login_url='login_user')
 def user_profile(request):
     profile = UserProfile.objects.filter(user=request.user)
     if profile:
@@ -217,7 +218,7 @@ def user_profile(request):
     return render(request, 'Ecom/user_profile.html', context=diction)
 
 
-
+@login_required(login_url='login_user')
 def user_update(request):
     profile = UserProfile.objects.get(user=request.user)
     #Cart
@@ -273,7 +274,7 @@ def user_update(request):
         return render(request, 'Ecom/user_update.html', context = diction)
 
 
-
+@login_required(login_url='login_user')
 def change_password(request):
 
     profile = UserProfile.objects.get(user=request.user)
@@ -328,12 +329,16 @@ def change_password(request):
         }
         return render(request, 'Ecom/change_password.html', context = diction)
 
+
+@login_required(login_url='login_user')
 def logout_user(request):
     logout(request)
     return redirect('home')
 
 
 
+
+@login_required(login_url='login_user')
 def user_comment(request):
     categories = Category.objects.all()
     settings = Settings.objects.get(id=1)
@@ -348,6 +353,8 @@ def user_comment(request):
     return render(request, 'Ecom/user_comment.html', context)
 
 
+
+@login_required(login_url='login_user')
 def comment_delete(request, id):
     current_user = request.user
     comment = Comment.objects.filter(user_id=current_user.id, id=id)
